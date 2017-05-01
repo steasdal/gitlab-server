@@ -1,0 +1,57 @@
+version: '2'
+
+services:
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    hostname: localhost
+    restart: always
+    networks:
+      - gitlab-server
+
+    ports:
+      - "80:80"
+      - "443:443"
+      - "23:22"
+
+    volumes:
+       - ~/gitlab-server/gitlab/config:/etc/gitlab
+       - ~/gitlab-server/gitlab/logs:/var/log/gitlab
+       - ~/gitlab-server/gitlab/data:/var/opt/gitlab
+       - ./gitlab.rb:/etc/gitlab/gitlab.rb
+
+    links:
+     - postgres:postgres
+     - redis:redis
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    networks:
+      - gitlab-server
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gitlab
+
+    volumes:
+       - ~/gitlab-server/postgres/data:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    container_name: redis
+    hostname: redis
+    restart: always
+    networks:
+      - gitlab-server
+
+    volumes:
+       - ~/gitlab-server/redis/data:/data
+
+networks:
+  gitlab-server:
+    driver: bridge
