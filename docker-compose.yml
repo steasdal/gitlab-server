@@ -16,9 +16,9 @@ services:
       - "23:22"
 
     volumes:
-       - ~/gitlab-server/gitlab/config:/etc/gitlab
-       - ~/gitlab-server/gitlab/logs:/var/log/gitlab
-       - ~/gitlab-server/gitlab/data:/var/opt/gitlab
+       - /srv/gitlab/config:/etc/gitlab
+       - /srv/gitlab/logs:/var/log/gitlab
+       - /srv/gitlab/data:/var/opt/gitlab
        - ./gitlab.rb:/etc/gitlab/gitlab.rb
 
     links:
@@ -38,11 +38,8 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: gitlab
 
-    ports:
-      - "5432:5432"
-
     volumes:
-       - ~/gitlab-server/postgres/data:/var/lib/postgresql/data
+       - /srv/postgres/data:/var/lib/postgresql/data
 
   redis:
     image: redis
@@ -53,7 +50,7 @@ services:
       - gitlab-server
 
     volumes:
-       - ~/gitlab-server/redis/data:/data
+       - /srv/redis/data:/data
 
 networks:
   gitlab-server:
