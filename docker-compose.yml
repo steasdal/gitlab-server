@@ -38,6 +38,9 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: gitlab
 
+    ports:
+      - "5432:5432"
+
     volumes:
        - ~/gitlab-server/postgres/data:/var/lib/postgresql/data
 
