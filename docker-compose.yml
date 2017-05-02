@@ -20,6 +20,7 @@ services:
        - /srv/gitlab/logs:/var/log/gitlab
        - /srv/gitlab/data:/var/opt/gitlab
        - ./gitlab.rb:/etc/gitlab/gitlab.rb
+       - ./redirect.conf:/etc/nginx/conf.d/redirect.conf
 
     links:
      - postgres:postgres

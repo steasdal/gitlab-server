@@ -770,6 +770,9 @@ redis['enable'] = false
 # nginx['listen_https'] = nil
 
 # nginx['custom_gitlab_server_config'] = "location ^~ /foo-namespace/bar-project/raw/ {\n deny all;\n}\n"
+
+nginx['custom_nginx_config'] = "include /etc/nginx/conf.d/redirect.conf;"
+
 # nginx['custom_nginx_config'] = "include /etc/nginx/conf.d/example.conf;"
 # nginx['proxy_read_timeout'] = 3600
 # nginx['proxy_connect_timeout'] = 300
