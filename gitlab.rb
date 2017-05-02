@@ -10,7 +10,7 @@
 ##! URL on which GitLab will be reachable.
 ##! For more details on configuring external_url see:
 ##! https://docs.gitlab.com/omnibus/settings/configuration.html#configuring-the-external-url-for-gitlab
-external_url 'http://teasdale.link'
+external_url 'http://gitlab.teasdale.link'
 
 ## Legend
 ##! The following notations at the beginning of each line may be used to
@@ -770,6 +770,9 @@ redis['enable'] = false
 # nginx['listen_https'] = nil
 
 # nginx['custom_gitlab_server_config'] = "location ^~ /foo-namespace/bar-project/raw/ {\n deny all;\n}\n"
+
+nginx['custom_nginx_config'] = "include /etc/nginx/conf.d/redirect.conf;"
+
 # nginx['custom_nginx_config'] = "include /etc/nginx/conf.d/example.conf;"
 # nginx['proxy_read_timeout'] = 3600
 # nginx['proxy_connect_timeout'] = 300
