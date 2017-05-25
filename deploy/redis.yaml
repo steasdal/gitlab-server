@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: redis-gitlab
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-gitlab
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+
+        ports:
+        - name: redis-port
+          containerPort: 6379
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-gitlab
+  labels
+    app: redis-gitlab
+spec:
+  ports:
+  - port: 6379
+    targetPort: redis-port
+    protocol: TCP
+    name: redis-port
+  selector:
+    app: redis-gitlab
