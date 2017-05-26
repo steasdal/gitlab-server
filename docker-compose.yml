@@ -19,8 +19,20 @@ services:
        - /srv/gitlab/config:/etc/gitlab
        - /srv/gitlab/logs:/var/log/gitlab
        - /srv/gitlab/data:/var/opt/gitlab
-       - ./gitlab.rb:/etc/gitlab/gitlab.rb
        - ./redirect.conf:/etc/nginx/conf.d/redirect.conf
+
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.teasdale.link'
+        postgresql['enable'] =             false
+        gitlab_rails['db_username'] =     "postgres"
+        gitlab_rails['db_password'] =     "postgres"
+        gitlab_rails['db_database'] =     "postgres"
+        gitlab_rails['db_host'] =         "postgres"
+        gitlab_rails['db_port'] =          5432
+        redis['enable'] =                  false
+        gitlab_rails['redis_host'] =      "redis"
+        gitlab_rails['redis_port'] =       6379
 
     links:
      - postgres:postgres
@@ -37,7 +49,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: gitlab
+      POSTGRES_DB: postgres
 
     volumes:
        - /srv/postgres/data:/var/lib/postgresql/data
