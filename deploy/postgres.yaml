@@ -4,14 +4,14 @@ metadata:
   name: postgres-persistent-volume
 spec:
   capacity:
-    storage: 10Gi
+    storage: 100Gi
   accessModes:
     - ReadWriteOnce                        # Only one node at a time can claim this space
   persistentVolumeReclaimPolicy: Retain    # Leave the files and directories alone when this pv is delete.
   storageClassName: postgres               # the Persistent Volume Claim will need to have this same name
   nfs:
-    path: /kubeshares/postgres
-    server: st-docker
+    path: /mnt/temp-storage/postgres
+    server: st-nas
 
 ---
 
@@ -24,7 +24,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: 100Gi
   storageClassName: postgres
 
 ---

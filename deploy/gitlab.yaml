@@ -4,14 +4,14 @@ metadata:
   name: gitlab-persistent-volume
 spec:
   capacity:
-    storage: 16Gi
+    storage: 100Gi
   accessModes:
     - ReadWriteMany                        # One or more nodes will be able to attach simultaneously
   persistentVolumeReclaimPolicy: Retain    # Leave the files and directories alone when this pv is delete.
   storageClassName: gitlab                 # the Persistent Volume Claim will need to have this same name
   nfs:
-    path: /kubeshares/gitlab
-    server: st-docker
+    path: /mnt/temp-storage/gitlab
+    server: st-nas
 
 ---
 
@@ -24,7 +24,7 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 8Gi
+      storage: 100Gi
   storageClassName: gitlab
 
 ---
@@ -92,7 +92,6 @@ metadata:
   labels:
     app: gitlab
 spec:
-  type: NodePort
   ports:
   - port: 80
     targetPort: http

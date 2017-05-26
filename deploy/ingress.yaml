@@ -11,7 +11,7 @@ spec:
         backend:
           serviceName: gitlab
           servicePort: 80
-  - host: st-docker
+  - host: st-kube-master
     http:
       paths:
       - path: /
