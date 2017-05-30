@@ -2,7 +2,7 @@
 Hey, let's run [GitLab](https://about.gitlab.com/)!
 
 ## Docker Compose
-Let's start simple by firing up GitLab with [Docker Compose](https://docs.docker.com/compose/).  Let's assume that
+Let's start simple by firing up GitLab with [Docker Compose](https://docs.docker.com/compose/).  We'll assume that
 you've already got Docker and Docker Compose installed and running.  This docker compose file will spin up Postgres,
 Redis and GitLab in three separate containers and link 'em all together on a 
 [bridge network](https://docs.docker.com/engine/userguide/networking/#bridge-networks) called `gitlab-server`.
