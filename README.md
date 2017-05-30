@@ -1,7 +1,47 @@
 # Gitlab Server
+Hey, let's run [GitLab](https://about.gitlab.com/)!
 
-This is mostly a docker compose file that'll let me spin up a GitLab server with a Postgres database and a Redis
-server in separate containers.
+## Docker Compose
+Let's start simple by firing up GitLab with [Docker Compose](https://docs.docker.com/compose/).  Let's assume that
+you've already got Docker and Docker Compose installed and running.  This docker compose file will spin up Postgres,
+Redis and GitLab in three separate containers and link 'em all together on a 
+[bridge network](https://docs.docker.com/engine/userguide/networking/#bridge-networks) called `gitlab-server`.
+You might want to take a peek at the `docker-compose.yml` file first to get a sense for what it'll be doing.
+
+While you're in the `docker-compose.yml` file, you'll need to replace the `external_url` value in the `gitlab`
+container's `environment` section with the external URL that you'll be accessing GitLab through.
+
+Once started, the containers will attempt to persist data in a few directories under a `/srv/` directory.
+You may want to create the `/srv` directory ahead of time.
+
+To get everything up and running, simply run the docker-compose up command:
+
+```bash
+$ docker-compose up -d
+```
+
+
+Verify that the containers are running:
+
+```bash
+$ docker-compose ps
+```
+
+Maybe check the logs to make sure that everything has started up properly:
+
+```bash
+$ docker-compose logs
+```
+
+Shut it all down when you're done:
+
+```bash
+$ docker-compose down
+```
+
+## Kubernetes
+Let's not pass Go and just jump right into running GitLab in Kubernetes, shall we?  Come on, this'll be fun!
+
 
 
 ### Stuff you'll need to do
