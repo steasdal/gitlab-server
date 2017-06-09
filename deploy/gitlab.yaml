@@ -75,6 +75,7 @@ metadata:
   labels:
     app: gitlab
 spec:
+  type: NodePort
   ports:
   - port: 80
     targetPort: http
@@ -84,6 +85,7 @@ spec:
     targetPort: ssh
     protocol: TCP
     name: ssh
+    nodePort: 30002
   - port: 443
     targetPort: ssl
     protocol: TCP
